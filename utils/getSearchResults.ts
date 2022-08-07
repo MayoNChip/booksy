@@ -1,0 +1,26 @@
+import axios from "axios";
+import Toast from "./genToast";
+
+const APIProvider = {
+  getSearchResults: async (searchBy: string, searchValue: string) => {
+    try {
+      const URL = `http://localhost:3000/api/books?${searchBy}=${searchValue}`;
+      console.log("URL", URL);
+      const res = await axios.get(
+        `http://localhost:3000/api/books?${searchBy}=${searchValue}`
+      );
+      console.log("res from axios", res);
+      console.log("type of res", typeof res.data);
+      // if (res.data.success === false) {
+      // return res.data
+      // }
+      // if (typeof res.data === "array") {
+      //   return res?.data[0]?.data;
+      // }
+      return res?.data[0].data;
+    } catch (error) {
+      console.log("error from search API", error);
+    }
+  },
+};
+export default APIProvider;
