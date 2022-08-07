@@ -47,8 +47,5 @@ const searchBooks = async (query: query) => {
   console.log("res in controller", res);
   const results = await Promise.all(res);
   return results;
-  //   const newTry = await prisma.books.findMany(...res);
-  //   console.log("res new try", newTry);
-  //   return newTry;
 };
 export { getAllBooks, searchBooks };

@@ -1,12 +1,12 @@
 import { Flex } from "@chakra-ui/react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import BooksTable from "../components/BooksTable";
 import BooksTables from "../components/BooksTables";
 import { GetServerSideProps, NextPage } from "next";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 
-const index: NextPage = ({ books }: props) => {
+const index: NextPage = ({ books }) => {
   console.log("props", books);
   return (
     <Flex
@@ -28,14 +28,6 @@ const index: NextPage = ({ books }: props) => {
       >
         <Search books={books} />
       </Flex>
-      {/* <Flex transform={["scaleX(-1)", "none"]}>
-        <NextImage
-          src={image}
-          width="1200px"
-          // height="30px"
-          layout="intrinsic"
-        ></NextImage>
-      </Flex> */}
     </Flex>
   );
 };
@@ -48,13 +40,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
-
-// index.getInitialProps = async () => {
-//   const res = await axios("http://localhost:3000/api/books");
-//   console.log("getserversideprops", res);
-//   return {
-//     data: res.data,
-//   };
-// };
 
 export default index;

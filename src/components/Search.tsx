@@ -41,6 +41,7 @@ export default function Search({ books }: props) {
   const [searchBy, setSearchBy] = useState("bookname");
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState(books);
+  const [placeholder, setPlaceholder] = useState("חפש לפי ספר");
   const toast = useToast();
 
   const formik = useFormik({
@@ -55,17 +56,22 @@ export default function Search({ books }: props) {
         values.searchValue
       );
       console.log("res from formik", res);
-      // if (res.data.success === false) {
-      //   console.log("we have an error");
-      //   console.log(res.data);
-      //   toast({
-      //     title: "שגיאה",
-      //     description: "נא להכניס ערך חיפוש",
-      //     status: "error",
-      //     duration: 5000,
-      //     isClosable: true,
-      //   });
-      // }
+      if (res.success === false) {
+        console.log("we have an error");
+        console.log(res);
+        toast({
+          title: "שגיאה",
+          description: "נא להכניס ערך חיפוש",
+          status: "error",
+          duration: 5000,
+          containerStyle: {
+            display: "flex",
+            direction: "rtl",
+          },
+          isClosable: true,
+        });
+        return setSearchResult(books);
+      }
       setSearchResult(res);
     },
   });
@@ -181,6 +187,7 @@ export default function Search({ books }: props) {
                       borderRadius="0"
                       onChange={formik.handleChange}
                       _focus={{ border: "none", outline: "none" }}
+                      placeholder={placeholder}
                     />
                   </FormControl>
 

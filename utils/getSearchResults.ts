@@ -11,9 +11,10 @@ const APIProvider = {
       );
       console.log("res from axios", res);
       console.log("type of res", typeof res.data);
-      // if (res.data.success === false) {
-      // return res.data
-      // }
+      if (res.data.success === false) {
+        console.error("Error in getSearchResults", res.data.message);
+        return res.data;
+      }
       // if (typeof res.data === "array") {
       //   return res?.data[0]?.data;
       // }

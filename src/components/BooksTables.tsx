@@ -1,11 +1,13 @@
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 
 type props = {
-  id: number;
-  bookName: string;
-  bookCatagory: string;
-  bookPublisher: String;
-  bookShelf: string;
+  searchResult: {
+    id: number;
+    bookName: string;
+    bookCatagory: string;
+    bookPublisher: String;
+    bookShelf: string;
+  }[];
 };
 
 type book = {
