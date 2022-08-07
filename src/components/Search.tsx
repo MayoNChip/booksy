@@ -5,30 +5,13 @@ import {
   Heading,
   Input,
   Select,
-  Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
-import MyInput from "./UI_kit/Input";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { FormControl, FormLabel } from "@chakra-ui/react";
 import BooksTables from "./BooksTables";
 import APIProvider from "../../utils/getSearchResults";
-import { Field, Formik, FormikProps, FormikProvider, useFormik } from "formik";
-
-// type props = {
-//   books?: {
-//     id: number;
-//     bookName: string;
-//     bookCatagory: string;
-//     bookPublisher: String;
-//     bookShelf: string;
-//   }[];
-// };
+import { FormikProvider, useFormik } from "formik";
 
 type props = {
   books: {
@@ -40,18 +23,9 @@ type props = {
   }[];
 };
 
-type field = {
-  name: string;
-  onBlur: () => void;
-  onChange: ChangeEventHandler;
-  value: string;
-};
-
 export default function Search({ books }: props) {
   const [searchBy, setSearchBy] = useState("bookname");
-  const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState(books);
-  const [placeholder, setPlaceholder] = useState("חפש לפי ספר");
   const toast = useToast();
 
   const formik = useFormik({
@@ -60,7 +34,6 @@ export default function Search({ books }: props) {
       searchValue: "",
     },
     onSubmit: async (values) => {
-      // alert(JSON.stringify(values, null, 2));
       const res = await APIProvider.getSearchResults(
         values.searchBy,
         values.searchValue
@@ -85,32 +58,6 @@ export default function Search({ books }: props) {
       setSearchResult(res);
     },
   });
-
-  const handleSearchBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selection = e.target.value;
-    console.log(selection);
-    setSearchBy(selection);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setSearchValue(e.target.value);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(searchBy, searchValue);
-    const result = await APIProvider.getSearchResults(searchBy, searchValue);
-    console.log("search results", result[0]);
-    setSearchResult(result[0].data);
-  };
-
-  const validateValue = (value: string) => {
-    if (value.length === 0) {
-      return "This field is required";
-    }
-    return undefined;
-  };
 
   return (
     <>
@@ -197,7 +144,7 @@ export default function Search({ books }: props) {
                       borderRadius="0"
                       onChange={formik.handleChange}
                       _focus={{ border: "none", outline: "none" }}
-                      placeholder={placeholder}
+                      placeholder="חפש..."
                     />
                   </FormControl>
 
