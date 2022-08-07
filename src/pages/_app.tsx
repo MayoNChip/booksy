@@ -5,6 +5,9 @@ import { theme } from "../../theme/theme";
 import Document from "next/document";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  {
+    console.log("im here");
+  }
   return (
     <div dir="rtl">
       <ChakraProvider theme={theme}>
