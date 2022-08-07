@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import BooksTable from "../components/BooksTable";
 import BooksTables from "../components/BooksTables";
 import { GetServerSideProps, NextPage } from "next";
