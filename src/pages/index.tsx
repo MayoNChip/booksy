@@ -6,8 +6,18 @@ import { GetServerSideProps, NextPage } from "next";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 
-const index: NextPage = ({ books }) => {
-  console.log("props", books);
+type props = {
+  books: {
+    id: number;
+    bookName: string;
+    bookCatagory: string;
+    bookPublisher: String;
+    bookShelf: string;
+  }[];
+};
+
+const index: NextPage<props> = (props: props) => {
+  console.log("props", props?.books);
   return (
     <Flex
       direction="column"
@@ -26,7 +36,7 @@ const index: NextPage = ({ books }) => {
         pb="15px"
         mb="15px"
       >
-        <Search books={books} />
+        <Search books={props?.books} />
       </Flex>
     </Flex>
   );

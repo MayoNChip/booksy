@@ -20,8 +20,18 @@ import BooksTables from "./BooksTables";
 import APIProvider from "../../utils/getSearchResults";
 import { Field, Formik, FormikProps, FormikProvider, useFormik } from "formik";
 
+// type props = {
+//   books?: {
+//     id: number;
+//     bookName: string;
+//     bookCatagory: string;
+//     bookPublisher: String;
+//     bookShelf: string;
+//   }[];
+// };
+
 type props = {
-  books?: {
+  books: {
     id: number;
     bookName: string;
     bookCatagory: string;
@@ -203,7 +213,7 @@ export default function Search({ books }: props) {
             </form>
           </Flex>
         </Flex>
-        <BooksTables searchResult={searchResult} />
+        <BooksTables books={searchResult || books} />
       </FormikProvider>
     </>
   );

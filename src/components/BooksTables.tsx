@@ -1,15 +1,5 @@
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 
-type props = {
-  searchResult: {
-    id: number;
-    bookName: string;
-    bookCatagory: string;
-    bookPublisher: String;
-    bookShelf: string;
-  }[];
-};
-
 type book = {
   id: number;
   bookName: string;
@@ -18,8 +8,18 @@ type book = {
   bookShelf: string;
 };
 
-export default function BooksTables({ searchResult }: props) {
-  console.log(searchResult);
+type props = {
+  books: {
+    id: number;
+    bookName: string;
+    bookCatagory: string;
+    bookPublisher: String;
+    bookShelf: string;
+  }[];
+};
+
+export default function BooksTables({ books }: props) {
+  console.log(books);
   return (
     <div>
       <Table mt="20px" variant="striped" colorScheme="green">
@@ -32,8 +32,8 @@ export default function BooksTables({ searchResult }: props) {
           </Tr>
         </Thead>
         <Tbody>
-          {searchResult &&
-            searchResult.map((book: book) => {
+          {books &&
+            books.map((book: book) => {
               return (
                 <Tr key={book.id}>
                   <Td>{book.bookShelf}</Td>
