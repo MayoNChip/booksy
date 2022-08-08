@@ -1,10 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import { Prisma } from "@prisma/client";
-import { prisma } from "../../../../lib/prisma";
-import {
-  getAllBooks,
-  searchBooks,
-} from "../../../controllers/books.controller";
+import { searchBooks } from "../../../controllers/books.controller";
 
 export default async function handler(
   req: NextApiRequest,
